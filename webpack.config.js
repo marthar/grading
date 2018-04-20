@@ -1,26 +1,27 @@
+const path = require('path');
 module.exports = {
   entry: './app/app.jsx',
   output: {
     path: __dirname,
-    filename: './public/bundle.js'
-  },
-  resolve: {
-    root: __dirname,
-    alias: {
-      
-    },
-    extensions: ['', '.js', '.jsx']
+    filename: './assets/bundle.js'
   },
   module: {
-    loaders: [
+    rules: [
+      { test: /\.css$/,
+        use: [
+          { loader: "style-loader" },
+          { loader: "css-loader" }
+        ]
+      },
       {
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015']
-        },
-        test: /\.jsx$/,
-        exclude: /(node_modules|bower_components)/
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: "babel-loader"
+      }, {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: "babel-loader"
       }
     ]
   }
-};
+}
