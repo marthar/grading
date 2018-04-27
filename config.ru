@@ -1,5 +1,9 @@
 require "./server.rb"
 require 'rack-proxy'
+require 'sass/plugin/rack'
+
+Sass::Plugin.options[:style] = :compressed
+use Sass::Plugin::Rack
 
 class AppProxy < Rack::Proxy
   def rewrite_env(env)
