@@ -1,0 +1,19 @@
+%form.form__form{action: "/projects", method:"post"}
+  - if @project.errors.present?
+    .form-errors
+      = @project.errors.full_messages.join("<br/>")
+  %ul.form
+    %li.form_field
+      %label.form__label Course Name
+      %input{type:"text",name:"project[course]",value:@project.course}
+    %li.form_field
+      %label.form__label Project Name
+      %input{type:"text",name:"project[name]",value:@project.name}
+    %li.form__field
+      %label.form__label Student Emails
+      %textarea{name: "project[student_emails]"}= @project.student_emails
+    %li.form__field
+      %label.form__label Components
+      %textarea{name: "project[component_names]"}= @project.component_names
+    %li.form_submit
+      %button{type:"submit"} Create Project

@@ -1,5 +1,85 @@
-@import "../../node_modules/normalize.css/normalize.css";
-
 body { 
-  
+  font-family: 'Open Sans', sans-serif; 
+  font-size:18px; 
+  margin:2.5%; 
+  font-weight:300;
+}
+
+
+h1, h2 { line-height:1em; margin:0; font-size: 2em; font-weight:bold;}
+h2 { font-size:1em; text-transform:uppercase; font-weight:300;}
+
+
+.grading {
+
+  &__form { 
+    clear:left; 
+    height:75px;
+  }
+
+  &__head {
+    width:20%; 
+    text-align:left; 
+    float:left; 
+    h1 { font-size:1em;  margin: 10px 0 0 0;}
+    h2 { font-size:.75em; font-weight:normal;  margin:0;}
+  }
+
+  &__box {
+    float:left;
+    margin:17px 10px 0 10px; 
+    font-size:.75em;  
+    font-weight:300;
+  }
+
+  &__radio { 
+    margin-right:6px;
+  }
+
+  &__border {
+    border-top:1px solid black; 
+    padding:20px 0 0 20px;
+  }
+
+/*  form .bold {font-weight:bold; font-size:1em; margin:11px 10px 0 10px;} */
+  &__labels { 
+    margin-left:0; 
+    padding-left:0; 
+    float:left; 
+    list-style:none;
+    margin-top:0px;
+    margin-bottom:0px;
+  }
+
+  &__label {
+    float:left;
+    width:100px; 
+    font-size:.65em; 
+    font-weight:bold; 
+    letter-spacing:.1em; 
+    text-transform:uppercase;
+  }
+}
+
+.evaluation {
+  display:flex;
+
+  &__entry {
+    flex:1 0 50%;
+    width: 50%;
+  }
+
+  &__suggestions {
+    flex:1 0 50%;
+    width: 50%;
+  }
+
+
+  &__input {
+    height:100px;
+    width:100%;
+    font-size:16px;
+    border:1px solid black;
+  }
+
 }

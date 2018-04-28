@@ -1,7 +1,23 @@
-var React    = require('react');
-var ReactDOM = require('react-dom');
+var $ = require('jquery');
 
-ReactDOM.render(
-  <h1>app</h1>,
-  document.getElementById('app')
-);
+function loadSuggestions() {
+  var val = $(".evaluation__input").val();
+
+  if(val && val.length > 3) { 
+    $.post("/evaluations", { evaluation: val }, (resp) => {
+      $(".evaluation__suggestions").html(resp);
+    });
+  }
+}
+
+
+$(document).on("keyup",".evaluation__input",() => {
+  loadSuggestions();
+});
+
+$(function() { loadSuggestions() });
+
+$(document).on("click",".evaluation__link",(e) => {
+  var val = $(e.target).text()
+  $(".evaluation__input").val(val);
+});

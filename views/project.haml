@@ -1,0 +1,13 @@
+%a{href:"/"} projects &raquo;
+%h1= @project.name
+%h2= @project.course
+
+%ul.list
+  - @project.project_students.recent.each do |student|
+    %li.list__item
+      %a.list__link{href: "/project/#{@project.id}/#{student.id}"}
+        = student.display_name
+        - if student.evaluated_at.present?
+          = "(#{student.evaluated_at.strftime("%m/%d/%y %l:%M%p")})"
+      %a.list__link{href: "mailto:#{student.generate_mailto}"}
+        Email

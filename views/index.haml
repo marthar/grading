@@ -1,10 +1,7 @@
-!!! 5
-%html{lang:"en"}
-  %head
-    %meta{charset:"utf-8"}
-    %link{rel:"stylesheet", media:"all", href:"stylesheets/app.css"}
-  %body
-    #app
-    %script{src:"assets/bundle.js"}
+%a{href:"/projects/new"} New Project
 
-    ok
+%ul.list
+  - @projects.each do |project|
+    %li.list__item
+      %a.list__link{href: "/project/#{project.id}"}
+        = "#{project.course} - #{project.name}"

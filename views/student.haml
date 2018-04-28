@@ -1,0 +1,36 @@
+%form{action:"/project/#{@project.id}/#{@student.id}",method: "post"}
+  %header
+    %h2= @project.course
+    %h1= @project.name
+    %p
+      %input{name: "student[name]", value: @student.name, placeholder:"Student Name"}
+    %p
+      %input{name: "student[email]", value: @student.email}
+    %p= (@student.evaluated_at || Date.today).strftime("%m/%d/%Y")
+  %section
+    .grading
+      .grading__head
+        %h2 Grading Scale
+      %ul.grading__labels
+        %li.grading__label Failing
+        %li.grading__label Below Average
+        %li.grading__label Adequate
+        %li.grading__label Above Average
+        %li.grading__label Exceptional
+    - @project.component_objects.each do |component|
+      .grading__form
+        .grading__head
+          %h1= component.name
+          %h2= component.subtext
+        .grading_grades
+          - @student.all_grades.each do |grade|
+            %label.grading__box
+              %input.grading__radio{name: "project_student[grades][#{component.id}", type: "radio", value: grade, checked: @student.grade?(grade,component)}
+              = grade
+      .grading__border
+    .evaluation
+      .evaluation__entry
+        %textarea.evaluation__input{name: "project_student[evaluation]"}= @student.evaluation.presence || @student.initial_evaluation
+      .evaluation__suggestions
+    %button{type:"submit"} Submit
+

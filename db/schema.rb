@@ -15,28 +15,39 @@ ActiveRecord::Schema.define(version: 2018_04_20_222526) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "project_evaluations", force: :cascade do |t|
+  create_table "components", force: :cascade do |t|
+    t.string "name"
+    t.string "subtext"
+  end
+
+  create_table "evaluations", force: :cascade do |t|
     t.text "evaluation"
   end
 
   create_table "project_students", force: :cascade do |t|
     t.integer "project_id"
+    t.integer "student_id"
     t.string "token"
-    t.string "name"
-    t.string "email"
-    t.integer "grades", array: true
+    t.json "grades"
     t.text "evaluation"
     t.datetime "evaluated_at"
     t.boolean "sent", default: false
     t.datetime "sent_at"
+    t.index ["student_id"], name: "index_project_students_on_student_id"
     t.index ["token"], name: "index_project_students_on_token"
   end
 
   create_table "projects", force: :cascade do |t|
     t.string "course"
     t.string "name"
-    t.text "students"
-    t.string "components", array: true
+    t.datetime "created_at"
+    t.integer "components", default: [], array: true
+  end
+
+  create_table "students", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
   end
 
 end
