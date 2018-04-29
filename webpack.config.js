@@ -3,7 +3,7 @@ module.exports = {
   entry: './app/app.jsx',
   output: {
     path: __dirname,
-    filename: './assets/bundle.js'
+    filename: './public/assets/bundle.js'
   },
   module: {
     rules: [

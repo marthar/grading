@@ -17,7 +17,7 @@ if development?
   run Rack::URLMap.new(
     '/' => Admin,
     '/grades' => Grades,
-    '/assets' => AppProxy.new
+    '/public/assets' => AppProxy.new
   )
 
 else 
