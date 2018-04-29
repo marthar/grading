@@ -3,7 +3,10 @@ body {
   font-size:18px; 
   margin:2.5%; 
   font-weight:300;
+  min-width:800px;
 }
+
+* { box-sizing: border-box; }
 
 
 h1, h2 { line-height:1em; margin:0; font-size: 2em; font-weight:bold;}
@@ -11,29 +14,91 @@ h2 { font-size:1em; text-transform:uppercase; font-weight:300;}
 p { padding:0px; }
 
 
+.split-header {
+  display:flex;
+  &__left { flex:0 0 50%; text-align:left;}
+  &__right { flex:0 0 50%; text-align:right;}
+  
+}
+
 .grading {
   padding-top:20px;
 
   &__form { 
-    clear:left; 
+    display:flex;
     height:75px;
   }
-
+  
+  &__header {
+    display:flex;  
+  }
+  
   &__head {
     width:20%; 
     text-align:left; 
-    float:left; 
+    flex:0 0 20%;
+    padding-right:20px;  
+    
     h1 { font-size:1em;  margin: 10px 0 0 0;}
     h2 { text-transform: none; padding-top:4px; font-size:.75em; font-weight:normal;  margin:0;}
   }
+  
+  &__labels { 
+    flex: 0 0 80%;
+    width:80%;
+    
+    
+    display:flex;
+    justify-content: space-between;
+    
+    margin-left:0; 
+    list-style:none;
+    margin-top:0px;
+    margin-bottom:0px;
+  }
+  
+
+  
+  &__label {
+    
+    flex: 0 1 10%;
+
+    text-align:center;
+    font-size:.65em; 
+    font-weight:bold; 
+    letter-spacing:.1em; 
+    text-transform:uppercase;
+    
+    &--lg {
+      flex: 0 1 20%;
+    }
+    
+    &--xl {
+      flex: 0 1 30%;
+      
+      
+    }
+  }
+  
+  &__grades {
+    flex: 0 0 80%;
+    width:80%;
+    
+    display:flex;
+    justify-content: space-between;
+         
+
+  }
 
   &__box {
-    float:left;
+    flex: 0 0 auto;
+    
     margin:17px 10px 0 10px; 
     font-size:.75em;  
-    font-weight:300;
+    font-weight:600;
 
     &--disabled {
+      font-weight:300;
       opacity:0.3;
     }
   }
@@ -48,24 +113,9 @@ p { padding:0px; }
   }
 
 /*  form .bold {font-weight:bold; font-size:1em; margin:11px 10px 0 10px;} */
-  &__labels { 
-    margin-left:0; 
-    padding-left:0; 
-    float:left; 
-    list-style:none;
-    margin-top:0px;
-    margin-bottom:0px;
-  }
 
-  &__label {
-    float:left;
-    padding-left:20px;
-    width:100px; 
-    font-size:.65em; 
-    font-weight:bold; 
-    letter-spacing:.1em; 
-    text-transform:uppercase;
-  }
+
+
 }
 
 .evaluation {
@@ -148,4 +198,19 @@ p { padding:0px; }
 
   }
 
+}
+
+@media screen and (max-device-width: 600px) {
+  
+  .grading__header { display:none; }
+  
+  .grading__form { 
+    flex-wrap: wrap; 
+    height:auto;
+    
+  }
+  .grading__head { flex:0 0 100%; }
+  
+  .grading__box { flex: 0 0 100%; font-size:30px; }
+  .grading__box.grading__box--disabled { display:none; }
 }

@@ -10,25 +10,26 @@
         %input{name: "student[email]", value: @student.email}
   %section
     .grading
-      .grading__head
-        %h2 Grading Scale
-      %ul.grading__labels
-        %li.grading__label Exceptional
-        %li.grading__label Above Average
-        %li.grading__label Adequate
-        %li.grading__label Below Average
-        %li.grading__label Failing
-    - @project.component_objects.each do |component|
-      .grading__form
+      .grading__header
         .grading__head
-          %h1= component.name
-          %h2= component.subtext
-        .grading_grades
-          - @student.all_grades.each do |grade|
-            %label.grading__box
-              %input.grading__radio{name: "project_student[grades][#{component.id}", type: "radio", value: grade, checked: @student.grade?(grade,component)}
-              = grade
-      .grading__border
+          %h2 Grading Scale
+        %ul.grading__labels
+          %li.grading__label.grading__label--xl Exceptional
+          %li.grading__label.grading__label--xl Above<br/>Average
+          %li.grading__label Adequate
+          %li.grading__label Below<br/>Average
+          %li.grading__label Failing
+      - @project.component_objects.each do |component|
+        .grading__form
+          .grading__head
+            %h1= component.name
+            %h2= component.subtext
+          .grading__grades
+            - @student.all_grades.each do |grade|
+              %label.grading__box
+                %input.grading__radio{name: "project_student[grades][#{component.id}", type: "radio", value: grade, checked: @student.grade?(grade,component)}
+                = grade
+        .grading__border
     .evaluation
       .evaluation__entry
         %textarea.evaluation__input{name: "project_student[evaluation]"}= @student.evaluation.presence || @student.initial_evaluation
