@@ -16,60 +16,81 @@ require "./evaluation"
 Time.zone = "Eastern Time (US & Canada)"
 
 
-use Rack::Auth::Basic, "Restricted Area" do |username, password|
-  username == 'martha' and password == ENV['PASSWORD']
-end
+class Admin < Sinatra::Base
 
-get '/' do
-  @projects = Project.order("id DESC")
-  haml :index
-end
+  use Rack::Auth::Basic, "Restricted Area" do |username, password|
+    username == 'martha' and password == ENV['PASSWORD']
+  end
 
-get '/project/:id' do
-  @project = Project.find(params[:id])
-  haml :project
+  get '/' do
+    @projects = Project.order("id DESC")
+    haml :index
+  end
 
-end
+  get '/project/:id' do
+    @project = Project.find(params[:id])
+    haml :project
+  end
 
-get '/project/:id/:student_id' do
-  @project = Project.find(params[:id])
-  @student = ProjectStudent.find(params[:student_id])
-  haml :student
-end
+  post "/projects/:id" do
+    @project = Project.find(params[:id])
 
-post '/project/:id/:student_id' do
-  @student = ProjectStudent.find(params[:student_id])
-  @student.student.update(params[:student])
+    params[:component].each do |key,pieces|
+      Component.find(key).update(pieces)
+    end
 
-  @student.attributes = params[:project_student]
-  @student.evaluated_at ||= Time.now
-  @student.save
-  
-  redirect "/project/#{params[:id]}"
-end
+    @project.update(params[:project])
+    redirect "/project/#{params[:id]}"
+  end
 
-post '/evaluations' do
-  @evaluations = Evaluation.match(params[:evaluation])
-  haml :evaluations, layout: false
-end
+  get '/project/:id/:student_id' do
+    @project = Project.find(params[:id])
+    @student = ProjectStudent.find(params[:student_id])
+    haml :student
+  end
 
-get '/projects/new' do
-  @project = Project.new
-  haml :new_project
-end
+  post '/project/:id/:student_id' do
+    @student = ProjectStudent.find(params[:student_id])
+    @student.student.update(params[:student])
 
+    @student.attributes = params[:project_student]
+    @student.evaluated_at ||= Time.now
+    @student.save
+    
+    redirect "/project/#{params[:id]}"
+  end
 
-post '/projects' do
-  @project = Project.new(params[:project])
-  if @project.save
-    redirect "/project/#{@project.id}"
-  else
+  post '/evaluations' do
+    @evaluations = Evaluation.match(params[:evaluation])
+    haml :evaluations, layout: false
+  end
+
+  get '/projects/new' do
+    @project = Project.new
     haml :new_project
   end
+
+
+  post '/projects' do
+    @project = Project.new(params[:project])
+    if @project.save
+      redirect "/project/#{@project.id}"
+    else
+      haml :new_project
+    end
+  end
+
+
+
 end
 
+class Grades < Sinatra::Base
 
-get '/:token' do
+  get '/:token' do
+    @student = ProjectStudent.where(token: params[:token].to_s).first
+    @project = @student.project if @student
+    haml :grades
+  end
 
 end
 

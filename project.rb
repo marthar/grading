@@ -1,15 +1,16 @@
 require "./component"
 
 class Project < ActiveRecord::Base
-  attr_accessor :student_emails
 
   has_many :project_students
 
   validates :course, presence: true
   validates :name, presence: true
 
-  before_create :create_components
-  after_create :create_students
+  before_save :create_components
+  after_save :create_students
+
+  attr_accessor :student_emails
 
   def component_objects
     return @component_objects if @component_objects
@@ -27,8 +28,9 @@ class Project < ActiveRecord::Base
 
   def create_components
     return unless @component_names
-    self.components = @component_names.split("\n").map(&:strip).map do |component_name|
-      Component.where(name: component_name).first_or_create.id
+    self.components ||= []
+    self.components += @component_names.split("\n").map(&:strip).map do |component_name|
+      Component.create(name: component_name).id
     end
   end
 

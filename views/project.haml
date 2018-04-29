@@ -2,6 +2,8 @@
 %h1= @project.name
 %h2= @project.course
 
+
+.list__title Students
 %ul.list
   - @project.project_students.recent.each do |student|
     %li.list__item
@@ -9,5 +11,22 @@
         = student.display_name
         - if student.evaluated_at.present?
           = "(#{student.evaluated_at.strftime("%m/%d/%y %l:%M%p")})"
+      - 
       %a.list__link{href: "mailto:#{student.generate_mailto}"}
-        Email
+        Send Email
+%form{action:"/projects/#{@project.id}", method:"post"}
+  %input{name: "project[student_emails]", placeholder: "Add Student Email"}
+  %button{type:"submit"} Add
+
+
+%form{action:"/projects/#{@project.id}", method:"post"}
+  .list__title Components
+  %ul.list
+    - @project.component_objects.each do |component|
+      %li.list__item
+        %input{name: "component[#{component.id}[name]", value:component.name}
+        %br
+        %input{name: "component[#{component.id}[subtext]", value:component.subtext, placeholder:"Subtext"}
+    %input{name: "project[component_names]", placeholder: "Add Component"}
+    %br
+    %button{type:"submit"} Update

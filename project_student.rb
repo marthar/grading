@@ -55,7 +55,7 @@ class ProjectStudent < ActiveRecord::Base
 
    You can see your grade for #{self.project.name} here:
 
-   #{ENV['URL_BASE']}/#{self.token}
+   #{ENV['URL_BASE']}/grades/#{self.token}
 
    -Martha
    EOF

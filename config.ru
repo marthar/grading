@@ -13,6 +13,7 @@ class AppProxy < Rack::Proxy
 end
 
 run Rack::URLMap.new(
-  '/' => Sinatra::Application,
+  '/' => Admin,
+  '/grades' => Grades,
   '/assets' => AppProxy.new
 )

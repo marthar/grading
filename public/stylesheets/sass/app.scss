@@ -30,6 +30,10 @@ h2 { font-size:1em; text-transform:uppercase; font-weight:300;}
     margin:17px 10px 0 10px; 
     font-size:.75em;  
     font-weight:300;
+
+    &--disabled {
+      opacity:0.3;
+    }
   }
 
   &__radio { 
@@ -80,6 +84,32 @@ h2 { font-size:1em; text-transform:uppercase; font-weight:300;}
     width:100%;
     font-size:16px;
     border:1px solid black;
+  }
+
+}
+
+
+.list {
+  list-style-type:none;
+  padding:0px;
+  margin:0px;
+
+  &__title { 
+    padding-top:20px;
+    font-weight:bold; 
+    padding-bottom:5px; 
+  }
+
+  &__item { 
+    padding:0px;
+    margin:0px;
+    padding-bottom:5px; 
+  }
+
+  &__link {
+    text-decoration:none;
+    color:black;
+
   }
 
 }
