@@ -2,21 +2,22 @@
   %header
     %h2= @project.course
     %h1= @project.name
-    %p
-      %input{name: "student[name]", value: @student.name, placeholder:"Student Name"}
-    %p
-      %input{name: "student[email]", value: @student.email}
-    %p= (@student.evaluated_at || Date.today).strftime("%m/%d/%Y")
+    %ul.list
+      %li.list__item= (@student.evaluated_at || Date.today).strftime("%m/%d/%Y")
+      %li.list__item
+        %input{name: "student[name]", value: @student.name, placeholder:"Student Name"}
+      %li.list__item
+        %input{name: "student[email]", value: @student.email}
   %section
     .grading
       .grading__head
         %h2 Grading Scale
       %ul.grading__labels
-        %li.grading__label Failing
-        %li.grading__label Below Average
-        %li.grading__label Adequate
-        %li.grading__label Above Average
         %li.grading__label Exceptional
+        %li.grading__label Above Average
+        %li.grading__label Adequate
+        %li.grading__label Below Average
+        %li.grading__label Failing
     - @project.component_objects.each do |component|
       .grading__form
         .grading__head

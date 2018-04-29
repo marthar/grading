@@ -8,9 +8,11 @@ body {
 
 h1, h2 { line-height:1em; margin:0; font-size: 2em; font-weight:bold;}
 h2 { font-size:1em; text-transform:uppercase; font-weight:300;}
+p { padding:0px; }
 
 
 .grading {
+  padding-top:20px;
 
   &__form { 
     clear:left; 
@@ -22,7 +24,7 @@ h2 { font-size:1em; text-transform:uppercase; font-weight:300;}
     text-align:left; 
     float:left; 
     h1 { font-size:1em;  margin: 10px 0 0 0;}
-    h2 { font-size:.75em; font-weight:normal;  margin:0;}
+    h2 { text-transform: none; padding-top:4px; font-size:.75em; font-weight:normal;  margin:0;}
   }
 
   &__box {
@@ -57,6 +59,7 @@ h2 { font-size:1em; text-transform:uppercase; font-weight:300;}
 
   &__label {
     float:left;
+    padding-left:20px;
     width:100px; 
     font-size:.65em; 
     font-weight:bold; 
@@ -103,12 +106,45 @@ h2 { font-size:1em; text-transform:uppercase; font-weight:300;}
   &__item { 
     padding:0px;
     margin:0px;
-    padding-bottom:5px; 
+    padding-bottom:10px; 
+
+    input { width:500px; }
   }
 
   &__link {
     text-decoration:none;
     color:black;
+
+  }
+
+}
+
+
+.form {
+  padding:0px;
+  margin:0px;
+  list-style-type:none;
+
+  &__errors {
+    color:red;
+
+  }
+
+  &__field {
+    padding-top:10px;
+  }
+
+  &__label {
+    display:block;
+  }
+
+
+  input, textarea {
+    width:500px;
+  }
+
+  textarea {
+    height:150px;
 
   }
 

@@ -5,9 +5,9 @@ class Student < ActiveRecord::Base
   end
 
   def name=(val)
-    names = val.split(" ")
+    names = val.to_s.split(" ")
     self.first_name = names[0]
-    self.last_name = names[1..-1].join(" ")
+    self.last_name = (names[1..-1]||[]).join(" ")
   end
 end
 

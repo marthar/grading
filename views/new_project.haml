@@ -1,12 +1,12 @@
 %form.form__form{action: "/projects", method:"post"}
   - if @project.errors.present?
-    .form-errors
+    .form__errors
       = @project.errors.full_messages.join("<br/>")
   %ul.form
-    %li.form_field
+    %li.form__field
       %label.form__label Course Name
       %input{type:"text",name:"project[course]",value:@project.course}
-    %li.form_field
+    %li.form__field
       %label.form__label Project Name
       %input{type:"text",name:"project[name]",value:@project.name}
     %li.form__field

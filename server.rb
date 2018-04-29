@@ -35,9 +35,11 @@ class Admin < Sinatra::Base
   post "/projects/:id" do
     @project = Project.find(params[:id])
 
-    params[:component].each do |key,pieces|
-      Component.find(key).update(pieces)
-    end
+    if params[:component]
+      params[:component].each do |key,pieces|
+        Component.find(key).update(pieces)
+      end
+    end 
 
     @project.update(params[:project])
     redirect "/project/#{params[:id]}"

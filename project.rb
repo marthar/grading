@@ -2,7 +2,7 @@ require "./component"
 
 class Project < ActiveRecord::Base
 
-  has_many :project_students
+  has_many :project_students, dependent: :destroy
 
   validates :course, presence: true
   validates :name, presence: true
