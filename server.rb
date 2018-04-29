@@ -42,7 +42,7 @@ class Admin < Sinatra::Base
     end 
 
     @project.update(params[:project])
-    redirect "/project/#{params[:id]}"
+    redirect "/admin/project/#{params[:id]}"
   end
 
   get '/project/:id/:student_id' do
@@ -59,7 +59,7 @@ class Admin < Sinatra::Base
     @student.evaluated_at ||= Time.now
     @student.save
     
-    redirect "/project/#{params[:id]}"
+    redirect "/admin/project/#{params[:id]}"
   end
 
   post '/evaluations' do
@@ -76,7 +76,7 @@ class Admin < Sinatra::Base
   post '/projects' do
     @project = Project.new(params[:project])
     if @project.save
-      redirect "/project/#{@project.id}"
+      redirect "/admin/project/#{@project.id}"
     else
       haml :new_project
     end
@@ -88,7 +88,7 @@ end
 
 class Grades < Sinatra::Base
 
-  get '/:token' do
+  get 'grades/:token' do
     @student = ProjectStudent.where(token: params[:token].to_s).first
     @project = @student.project if @student
     haml :grades

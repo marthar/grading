@@ -4,7 +4,7 @@ function loadSuggestions() {
   var val = $(".evaluation__input").val();
 
   if(val && val.length > 3) { 
-    $.post("/evaluations", { evaluation: val }, (resp) => {
+  $.post("/admin/evaluations", { evaluation: val }, (resp) => {
       $(".evaluation__suggestions").html(resp);
     });
   }

@@ -15,15 +15,15 @@ if development?
   end
 
   run Rack::URLMap.new(
-    '/' => Admin,
-    '/grades' => Grades,
+    '/admin' => Admin,
+    '/' => Grades,
     '/assets' => AppProxy.new
   )
 
 else 
 
   run Rack::URLMap.new(
-    '/' => Admin,
-    '/grades' => Grades
+    '/admin' => Admin,
+    '/' => Grades
   )
 end

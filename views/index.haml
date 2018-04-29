@@ -3,5 +3,5 @@
 %ul.list
   - @projects.each do |project|
     %li.list__item
-      %a.list__link{href: "/project/#{project.id}"}
+      %a.list__link{href: "/admin/project/#{project.id}"}
         = "#{project.course} - #{project.name}"

@@ -1,4 +1,4 @@
-%form.form__form{action: "/projects", method:"post"}
+%form.form__form{action: "/admin/projects", method:"post"}
   - if @project.errors.present?
     .form__errors
       = @project.errors.full_messages.join("<br/>")
