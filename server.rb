@@ -88,7 +88,7 @@ end
 
 class Grades < Sinatra::Base
 
-  get 'grades/:token' do
+  get '/grades/:token' do
     @student = ProjectStudent.where(token: params[:token].to_s).first
     @project = @student.project if @student
     haml :grades
