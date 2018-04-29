@@ -3,7 +3,6 @@ body {
   font-size:18px; 
   margin:2.5%; 
   font-weight:300;
-  min-width:800px;
 }
 
 * { box-sizing: border-box; }
@@ -200,7 +199,7 @@ p { padding:0px; }
 
 }
 
-@media screen and (max-device-width: 600px) {
+@media only screen and (max-width: 600px) {
   
   .grading__header { display:none; }
   

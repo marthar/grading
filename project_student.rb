@@ -55,7 +55,7 @@ class ProjectStudent < ActiveRecord::Base
 
    You can see your grade for #{self.project.name} here:
 
-   #{ENV['URL_BASE']}/grades/#{self.token}
+   #{grade_link}
 
    -Martha
    EOF
@@ -63,6 +63,10 @@ class ProjectStudent < ActiveRecord::Base
 
    body = CGI.escape(body)
    "#{self.email}?subject=#{subject}&body=#{body}"
+ end
+
+ def grade_link
+   "#{ENV['URL_BASE']}/grades/#{self.token}"
  end
 
 

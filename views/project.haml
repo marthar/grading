@@ -11,9 +11,12 @@
         = student.display_name
         - if student.evaluated_at.present?
           = "(#{student.evaluated_at.strftime("%m/%d/%y %l:%M%p")})"
-      - 
-      %a.list__link{href: "mailto:#{student.generate_mailto}"}
-        Send Email
+
+          %a.list__link{href: student.grade_link, target:"_blank"}
+            Student View 
+          = "-" 
+          %a.list__link{href: "mailto:#{student.generate_mailto}", target:"_blank"}
+            Send Email
 %form{action:"/admin/projects/#{@project.id}", method:"post"}
   %input{name: "project[student_emails]", placeholder: "Add Student Email"}
   %button{type:"submit"} Add
