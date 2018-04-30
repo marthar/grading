@@ -12,6 +12,8 @@ class ProjectStudent < ActiveRecord::Base
 
   delegate :name, :email, to: :student
 
+  validate :evaluation_student
+
   def display_name
     self.student.first_name.present? ?
       self.student.name : self.student.email
@@ -37,7 +39,7 @@ class ProjectStudent < ActiveRecord::Base
 
   def save_evaluation
     if self.evaluation.present?
-      Evaluation.generate_evaluation(self.evaluation)
+      Evaluation.generate_evaluation(self.evaluation,self.student.first_name)
     end
   end
   
@@ -72,6 +74,16 @@ class ProjectStudent < ActiveRecord::Base
 
  def set_token
    self.token =  SecureRandom.urlsafe_base64(64).gsub(/\-/,"")[0..16].downcase
+ end
+
+ def evaluation_student
+   if evaluation.present? && evaluation.include?("STUDENT_NAME")
+     self.errors.add(:evaluation,"is missing student name")
+   end
+
+   if !self.new_record? && grades.keys.length < project.components.length
+     self.errors.add(:grades,"are missing")
+   end
  end
 
 end

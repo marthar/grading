@@ -13,3 +13,4 @@ gem "dotenv"
 gem "rake"
 gem "sass"
 gem "activesupport"
+gem 'nlp-pure'

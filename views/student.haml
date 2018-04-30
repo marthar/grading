@@ -5,9 +5,12 @@
     %ul.list
       %li.list__item= (@student.evaluated_at || Date.today).strftime("%m/%d/%Y")
       %li.list__item
-        %input{name: "student[name]", value: @student.name, placeholder:"Student Name"}
+        %input{name: "student[name]", value: @student.name, placeholder:"Student Name", data: { student_id: @student.student_id }}
       %li.list__item
         %input{name: "student[email]", value: @student.email}
+  - if @student.errors.present?
+    .form__errors
+      = @student.errors.full_messages.join("<br/>")
   %section
     .grading
       .grading__header

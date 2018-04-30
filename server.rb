@@ -5,6 +5,7 @@ require "pg"
 require "sinatra/activerecord"
 require 'active_support/all'
 require "sinatra/json"
+require 'nlp_pure/segmenting/default_sentence'
 require "sinatra/reloader" if development?
 
 require "./component"
@@ -52,18 +53,24 @@ class Admin < Sinatra::Base
   end
 
   post '/project/:id/:student_id' do
+    @project = Project.find(params[:id])
     @student = ProjectStudent.find(params[:student_id])
     @student.student.update(params[:student])
 
     @student.attributes = params[:project_student]
     @student.evaluated_at ||= Time.now
-    @student.save
-    
-    redirect "/admin/project/#{params[:id]}"
+
+    if  @student.save
+      redirect "/admin/project/#{params[:id]}"
+    else
+
+      haml :student
+    end
   end
 
   post '/evaluations' do
-    @evaluations = Evaluation.match(params[:evaluation])
+    @student = Student.find(params[:student_id])
+    @evaluations = Evaluation.match(params[:evaluation], @student.first_name)
     haml :evaluations, layout: false
   end
 

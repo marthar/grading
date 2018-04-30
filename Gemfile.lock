@@ -24,6 +24,7 @@ GEM
       concurrent-ruby (~> 1.0)
     minitest (5.11.3)
     multi_json (1.13.1)
+    nlp-pure (0.2.0)
     pg (1.0.0)
     puma (3.11.2)
     rack (1.6.4)
@@ -69,6 +70,7 @@ DEPENDENCIES
   activesupport
   dotenv
   haml
+  nlp-pure
   pg
   puma
   rack-proxy
