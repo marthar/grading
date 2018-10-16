@@ -50,7 +50,7 @@ class ProjectStudent < ActiveRecord::Base
   end
 
  def generate_mailto
-   subject = CGI.escape("Your grade on #{self.project.name}")
+   subject = CGI.escape("Your grade on #{self.project.name}").gsub("+","%20")
 
    body = <<-EOF
    Hi #{student.first_name},
@@ -63,7 +63,7 @@ class ProjectStudent < ActiveRecord::Base
    EOF
 
 
-   body = CGI.escape(body)
+   body = CGI.escape(body).gsub("+","%20")
    "#{self.email}?subject=#{subject}&body=#{body}"
  end
 
